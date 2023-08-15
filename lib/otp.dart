@@ -19,11 +19,11 @@ class OTPScreen extends StatelessWidget {
           onChanged: (value) {
             if (value.length == 6) {
               Repository().otpLogic(context, verificationId, value.trim());
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const Success(),
-                  ));
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => const Success(),
+              //     ));
             }
           },
           keyboardType: TextInputType.number,

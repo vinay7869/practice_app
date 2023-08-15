@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:practice_app/firebase_options.dart';
+import 'package:practice_app/off.dart';
 import 'package:practice_app/otp.dart';
 import 'package:practice_app/repository.dart';
 import 'package:practice_app/success.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Choice(),
+      home: OfficeWork(),
     );
   }
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Success extends StatelessWidget {
-  const Success({super.key});
+ final int index;
+  const Success({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
