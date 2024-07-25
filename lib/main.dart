@@ -1,20 +1,20 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:practice_app/bloc%20prat/favorites/cubit/favourites_cubit.dart';
+import 'package:practice_app/bloc%20prat/home/cubit/home_cubit.dart';
 import 'package:practice_app/firebase_options.dart';
-import 'package:practice_app/off.dart';
-import 'package:practice_app/otp.dart';
-import 'package:practice_app/repository.dart';
-import 'package:practice_app/success.dart';
-
-import 'choice.dart';
-// import 'package:practice_app/notification_screen.dart';
-// import 'package:practice_app/notification_services.dart';
-
-// final navigatorKey = GlobalKey<NavigatorState>();
+import 'package:practice_app/helpers/global.dart';
+import 'package:practice_app/helpers/pref.dart';
+import 'package:practice_app/routes/routes.dart';
+import 'bloc prat/home/screen/home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Hive.initFlutter().then((value) async => await Pref.initializeHive());
+
   runApp(const MyApp());
 }
 
@@ -23,51 +23,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: OfficeWork(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  TextEditingController controller = TextEditingController();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Practice App')),
-      body: Column(
-        children: [
-          Center(
-              child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: TextField(
-              keyboardType: TextInputType.phone,
-              controller: controller,
-              decoration: const InputDecoration(
-                  hintText: 'Enter no', contentPadding: EdgeInsets.all(8)),
-            ),
-          )),
-          const SizedBox(
-            height: 20,
-          ),
-          ElevatedButton(
-              onPressed: () {
-                String phoneNumber = controller.text.trim();
-                if (phoneNumber.isNotEmpty) {
-                  Repository().signIn(context, phoneNumber);
-                }
-              },
-              child: const Text('Next'))
-        ],
+    mq = MediaQuery.sizeOf(context);
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => HomeCubit()),
+        BlocProvider(create: (_) => FavouritesCubit()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: (settings) => generateRoutes(settings),
+        home: const Home(),
       ),
     );
   }
