@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:hive/hive.dart';
-import '../model/product_model.dart';
+import '../bloc cubit pract/model/product_model.dart';
 
 class Pref {
   static late Box box;

@@ -1,5 +1,6 @@
-import 'package:bloc/bloc.dart';
-import '../../../helpers/pref.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../helpers/pref.dart';
 import '../../../model/product_model.dart';
 
 part 'favourites_state.dart';

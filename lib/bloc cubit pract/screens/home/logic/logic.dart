@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import '../../../helpers/global.dart';
+import '../../../../helpers/global.dart';
 import '../../../model/product_model.dart';
 
 class LogicController {

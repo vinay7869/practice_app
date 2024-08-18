@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:practice_app/bloc%20prat/favorites/screen/fav.dart';
-import 'package:practice_app/bloc%20prat/home/cubit/home_cubit.dart';
-import 'package:practice_app/bloc%20prat/products_list/product_list.dart';
+import '../../favorites/screen/fav.dart';
+import '../cubit/home_cubit.dart';
+import '../../products_list/product_list.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -54,9 +54,16 @@ class _HomeState extends State<Home> {
                   height: MediaQuery.sizeOf(context).height * .34,
                   width: MediaQuery.sizeOf(context).width * .3,
                   child: InkWell(
-                    onTap: () => Navigator.pushNamed(
-                        context, ProductList.routeName,
-                        arguments: {'category': text, 'id': 27}),
+                    // onTap: () => Navigator.pushNamed(
+                    //     context, ProductList.routeName,
+                    //     arguments: {'category': text, 'id': 27}),
+
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              ProductBloc(category: text, id: 27),
+                        )),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [

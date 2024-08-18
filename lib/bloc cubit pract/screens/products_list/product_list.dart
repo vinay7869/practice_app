@@ -1,8 +1,23 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:practice_app/bloc%20prat/product_details/product_details.dart';
+import '../../../bloc bloc pract/bloc/home_new_bloc.dart';
+import '../product_details/product_details.dart';
 import '../home/cubit/home_cubit.dart';
+
+class ProductBloc extends StatelessWidget {
+  final String category;
+  final int id;
+  const ProductBloc({super.key, required this.category, required this.id});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => HomeNewBloc(),
+      child: ProductList(category: category, id: id),
+    );
+  }
+}
 
 class ProductList extends StatefulWidget {
   final String category;
@@ -16,11 +31,11 @@ class ProductList extends StatefulWidget {
 }
 
 class _ProductListState extends State<ProductList> {
-  late final c = context.read<HomeCubit>();
+  late final c = context.read<HomeNewBloc>();
 
   @override
   void initState() {
-    c.fetchProducts(widget.category);
+    c.add(FetchProducts(widget.category));
     super.initState();
   }
 
@@ -30,7 +45,7 @@ class _ProductListState extends State<ProductList> {
         appBar: AppBar(
           title: Text(widget.category.toUpperCase()),
         ),
-        body: BlocSelector<HomeCubit, HomeState, HomeState>(
+        body: BlocSelector<HomeNewBloc, HomeNewState, HomeNewState>(
           bloc: c,
           selector: (state) => state,
           builder: (context, state) {

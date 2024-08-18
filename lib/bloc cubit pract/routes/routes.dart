@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:practice_app/bloc%20prat/favorites/screen/fav.dart';
-import 'package:practice_app/model/product_model.dart';
-import 'package:practice_app/bloc%20prat/home/screen/home.dart';
-import 'package:practice_app/bloc%20prat/product_details/product_details.dart';
-import 'package:practice_app/bloc%20prat/products_list/product_list.dart';
+import '../screens/favorites/screen/fav.dart';
+import '../model/product_model.dart';
+import '../screens/home/screen/home.dart';
+import '../screens/product_details/product_details.dart';
+import '../screens/products_list/product_list.dart';
 
 Route<dynamic> generateRoutes(RouteSettings settings) {
   switch (settings.name) {

@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:practice_app/bloc%20prat/favorites/cubit/favourites_cubit.dart';
-import 'package:practice_app/model/product_model.dart';
+import '../favorites/cubit/favourites_cubit.dart';
+import '../../model/product_model.dart';
 
 class ProductDetails extends StatefulWidget {
   final Product product;
@@ -42,23 +42,22 @@ class _ProductDetailsState extends State<ProductDetails> {
                 style:
                     const TextStyle(fontWeight: FontWeight.w700, fontSize: 17),
               )),
-              IconButton(
-                  onPressed: () {
-                    if (c.favProducts.contains(widget.product)) {
-                      c.removeFav(widget.product);
-                    } else {
-                      c.addFav(widget.product);
-                    }
-                  },
-                  icon: BlocSelector<FavouritesCubit, FavouritesState, bool>(
-                    selector: (state) => state.isFav,
-                    builder: (context, state) {
-                      return state
-                          ? const Icon(Icons.favorite, color: Colors.red)
-                          : const Icon(Icons.favorite_border,
-                              color: Colors.red);
-                    },
-                  ))
+              IconButton(onPressed: () {
+                if (c.favProducts.contains(widget.product)) {
+                  c.removeFav(widget.product);
+                } else {
+                  c.addFav(widget.product);
+                }
+              }, icon: BlocBuilder<FavouritesCubit, FavouritesState>(
+                // selector: (state) => state.isFav,
+                builder: (context, state) {
+                  final isFav = state.favProducts.contains(widget.product);
+
+                  return isFav
+                      ? const Icon(Icons.favorite, color: Colors.red)
+                      : const Icon(Icons.favorite_border, color: Colors.red);
+                },
+              ))
             ],
           ),
           const SizedBox(height: 10),

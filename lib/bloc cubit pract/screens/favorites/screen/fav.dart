@@ -2,8 +2,8 @@ import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:practice_app/bloc%20prat/favorites/cubit/favourites_cubit.dart';
-import 'package:practice_app/bloc%20prat/product_details/product_details.dart';
+import '../cubit/favourites_cubit.dart';
+import '../../product_details/product_details.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});
